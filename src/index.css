@@ -58,7 +58,7 @@ h1, h2 {
     gap: 1.5rem;
   }
 
-  .navbar a {
+  .navbar a.nav-logo {
   text-decoration: none;
   color: #ffffff;
   font-family: 'Inter', sans-serif;
@@ -72,7 +72,7 @@ h1, h2 {
 
 .navbar a:hover {
   color: var(--green-accent);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: none;
 }
 
 .nav-logo {

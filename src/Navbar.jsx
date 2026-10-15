@@ -11,7 +11,7 @@ function Navbar({ search, setSearch, total, user, onLogout }) {
     return (
         <>
             <nav className={`navbar ${user ? "logged-in" : "" }`}>
-                <div className="nav-logo">Fresh Mart</div>
+                <Link to="/" className="nav-logo">Fresh Mart</Link>
 
                 <div className={`nav-search-wrap ${searchOpen ? "open" : ""}`}>
                     <button 
