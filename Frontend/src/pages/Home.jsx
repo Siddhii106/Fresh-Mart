@@ -4,7 +4,7 @@ import { products, categories } from "../data/products";
 import heroImg from "../assets/heroImg.jpg";
 import VeggiesImg from "../assets/VeggiesImg.jpg";
 
-function Home({search, setTotal}) {
+function Home({search, cart, addToCart, removeFromCart}) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [showAll, setShowAll] = useState(false);
   const visible = products
@@ -13,6 +13,10 @@ function Home({search, setTotal}) {
       product.name.toLowerCase().includes(search.toLowerCase()) || 
       product.price.toLowerCase().includes(search.toLowerCase()));
   const shown = showAll ? visible : visible.slice(0, 6);
+
+  function scrollToProducts() {
+    document.getElementById("products")?.scrollIntoView({ behavior: "smooth", block: "start"})
+  }
 
   return (
     <>
@@ -23,8 +27,8 @@ function Home({search, setTotal}) {
           <p>Shop farm-fresh fruits and vegetables with fast, reliable delivery.</p>
           
           <div className="hero-buttons">
-            <button className="hero-btn">Shop Now</button>
-            <button className="hero-btn-outline">View All Products</button>
+            <button className="hero-btn" onClick={scrollToProducts}>Shop Now</button>
+            <button className="hero-btn-outline" onClick={scrollToProducts}>View All Products</button>
           </div>
 
           <div className="hero-badges">
@@ -54,7 +58,7 @@ function Home({search, setTotal}) {
           ))}
         </div>
 
-      <h2 className="section-title">Best Selling <em>Products</em></h2>
+      <h2 id="products" className="section-title">Best Selling <em>Products</em></h2>
 
       <div className="filter-pills">
           {["All", "Vegetables", "Fruits", "Dairy & Eggs", "Sea Food", "Snacks"].map((filter) => (
@@ -69,20 +73,24 @@ function Home({search, setTotal}) {
       </div>
 
       <ul className="product-grid">
-      {shown.map((product) => (
-          <li key = {product.id}>
-            <ProductCard
-              onAdd={() => setTotal(prev => prev + 1 )}
-              onRemove={() => setTotal(prev => prev - 1)}
-              name={product.name}
-              price={product.price}
-              image={product.image}
-              rating={product.rating}
-              weight={product.weight}
-              tag={product.tag}
-            />
-          </li>
-        ))}
+      {shown.map((product) => {
+        const inCart = cart.find((item) => item.id === product.id);
+        return(
+            <li key = {product.id}>
+              <ProductCard
+                quantity={inCart ? inCart.quantity : 0}
+                onAdd={() => addToCart(product.id)}
+                onRemove={() => removeFromCart(product.id)}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                rating={product.rating}
+                weight={product.weight}
+                tag={product.tag}
+              />
+            </li>
+          );
+        })}
       </ul>
 
       {visible.length > 6 && (

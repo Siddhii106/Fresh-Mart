@@ -1,18 +1,18 @@
-import { useState } from "react";
+//import { useState } from "react";
 
 function ProductCard (props) {
-    const [count, setCount] = useState(0);
+    //const [count, setCount] = useState(0);
 
-    function increment() {
-        setCount(count + 1);
-        props.onAdd();
-    }
+    //function increment() {
+        //setCount(count + 1);
+      //  props.onAdd();
+    //}
 
-    function decrement() {
-        if (count === 0) return;
-        setCount(count - 1);
-        props.onRemove;
-    }
+    //function decrement() {
+        //if (count === 0) return;
+        //setCount(count - 1);
+      //  props.onRemove;
+    //}
 
     return (
         <> 
@@ -30,13 +30,13 @@ function ProductCard (props) {
                 <div className="card-footer">
                     <span className="price">{props.price}</span>
 
-                {count === 0 ? (
-                    <button className="add-btn" onClick={increment}>Add</button>
+                {props.quantity === 0 ? (
+                    <button className="add-btn" onClick={props.onAdd}>Add</button>
                 ) : (
                     <div className="stepper">
-                        <button onClick={decrement}>-</button>
-                        <span>{count}</span>
-                        <button onClick={increment}>+</button>
+                        <button onClick={props.onRemove}>-</button>
+                        <span>{props.quantity}</span>
+                        <button onClick={props.onAdd}>+</button>
                     </div>
                 )}
                 </div>

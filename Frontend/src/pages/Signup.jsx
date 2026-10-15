@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PasswordInput from "../PasswordInput";
 
-function Signup() {
+function Signup({ onLogin }) {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,13 +29,14 @@ function Signup() {
             setError("Passwords do not match");
             return;
         }
-        setError("")
-        alert(`Welcome, ${name}! Your account has been created.`)
+        setError("");
+        onLogin(email);
+        navigate("/");
     }
 
     return (
         <div className= "signup-container">
-            <form on Submit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
             <h1>Sign Up</h1>
 
             <input
@@ -48,20 +52,17 @@ function Signup() {
                 placeholder="Enter Your Email"
             />
 
-            <input
+            <PasswordInput
                 value={password}
-                type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter Password"
             />
 
-            <input
+            <PasswordInput
                 value={confirmPassword}
-                type="password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Your Password"
             />
-
             {error && <p style={{ color: "red" }}>{error}</p>}
 
             <button type="submit">Sign Up</button>
