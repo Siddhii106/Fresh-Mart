@@ -1121,6 +1121,11 @@ footer {
     padding: 0 1rem;
   }
 
+  .nav-right {
+    gap: 1rem;
+    padding-right: 0.5rem;
+  }
+
   .filter-pills {
     padding: 0 1rem;
   }
