@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PasswordInput from "../PasswordInput";
 
-function Login() {
+function Login({ onLogin }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    //const [username, setUsername] = useState("");
+    const navigate = useNavigate();
     const [error, setError] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
+
         if (!email.includes("@")) {
-            alert("Please enter a valid email address.");
+            setError("Please enter a valid email address.");
             return;
         }
         if (password.length < 6) {
@@ -18,7 +21,8 @@ function Login() {
         }
 
         setError("");
-        alert(`Welcome back, ${email}! You have successfully logged in.`);
+        onLogin(email);
+        navigate("/");
 
     }
 
@@ -26,20 +30,24 @@ function Login() {
         <>
             <form onSubmit={handleSubmit}>
                 <div className="login-container">
+
                     <h1>Log In</h1>
+
                     <input
                         type="email"
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <input
-                        type="password"
-                        placeholder="Password"
+
+                    <PasswordInput
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
                     />
+
                     {error && <p className="error">Error</p>}
+
                     <button type="submit">Login</button>
                 </div>
             </form>
