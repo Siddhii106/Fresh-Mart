@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { products } from "../data/products";
-import { getPriceValue } from "../utils";
 
 const ORDERS_KEY = "freshmart_orders";
 
-function Checkout({ cart, user, clearCart }) {
+function Checkout({ products, cart, user, clearCart }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -21,7 +19,7 @@ function Checkout({ cart, user, clearCart }) {
     .filter(Boolean);
 
   const total = items.reduce(
-    (sum, item) => sum + getPriceValue(item.price) * item.quantity,
+    (sum, item) => sum + Number(item.price) * item.quantity,
     0
   );
 

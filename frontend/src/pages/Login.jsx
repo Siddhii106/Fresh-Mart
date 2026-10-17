@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "../PasswordInput";
+import { loginUser } from "../auth";
 
 function Login({ onLogin }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         if (!email.includes("@")) {
@@ -21,8 +23,17 @@ function Login({ onLogin }) {
         }
 
         setError("");
-        onLogin(email);
-        navigate("/");
+        setLoading(true);
+
+        try {
+            const data = await loginUser({ email, password });
+            onLogin(data.email);
+            navigate("/");
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
 
     }
 
@@ -46,9 +57,9 @@ function Login({ onLogin }) {
                         placeholder="Password"
                     />
 
-                    {error && <p className="error">Error</p>}
+                    {error && <p className="error">{error}</p>}
 
-                    <button type="submit">Login</button>
+                    <button type="submit" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
                 </div>
             </form>
         </>

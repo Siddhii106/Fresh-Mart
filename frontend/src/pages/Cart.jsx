@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
-import { products } from "../data/products";
-import { getPriceValue } from "../utils";
 
-function Cart({ cart, addToCart, removeFromCart }) {
+function Cart({ products, cart, addToCart, removeFromCart }) {
+  if(cart.length > 0 && products.length === 0) {
+    return (
+      <div className="cart-page">
+        <p>Loading your cart...</p>
+      </div>
+    );
+  }
+
   const items = cart
     .map((item) => {
       const product = products.find((p) => p.id === item.id);
@@ -12,7 +18,7 @@ function Cart({ cart, addToCart, removeFromCart }) {
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce(
-    (sum, item) => sum + getPriceValue(item.price) * item.quantity,
+    (sum, item) => sum + Number(item.price) * item.quantity,
     0
   );
 
@@ -38,7 +44,7 @@ function Cart({ cart, addToCart, removeFromCart }) {
 
             <div className="cart-item-info">
               <h3>{item.name}</h3>
-              <p>{item.price}</p>
+              <p>{item.display_price}</p>
             </div>
 
             <div className="stepper">

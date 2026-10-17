@@ -103,6 +103,7 @@ function App() {
           path="/cart"
           element={
             <Cart
+              products={products}
               cart={cart}
               addToCart={addToCart}
               removeFromCart={removeFromCart}

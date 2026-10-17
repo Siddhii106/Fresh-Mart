@@ -70,9 +70,21 @@ h1, h2 {
   white-space: nowrap;
 }
 
+.navbar a {
+  text-decoration: none;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
 .navbar a:hover {
   color: var(--green-accent);
-  background-color: none;
+  background-color: transparent;
 }
 
 .nav-logo {
