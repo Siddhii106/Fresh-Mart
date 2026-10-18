@@ -709,12 +709,14 @@ h1, h2 {
   position: absolute;
   top: 24px;
   left: 24px;
+  z-index: 1;
   background: var(--green-accent);
   color: var(--green-dark);
-  font-size: 0.75;
+  font-size: 0.75rem;
   font-weight: 600;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 .rating {
