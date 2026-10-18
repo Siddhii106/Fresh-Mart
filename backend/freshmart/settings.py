@@ -142,6 +142,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
-    "https://fresh-mart-5rlo.vercel.app",
-   " https://fresh-mart-lilac-zeta.vercel.app",
+    "https://fresh-mart-lilac-zeta.vercel.app",
+    "https://fresh-mart-qu14c1cdv-siddhi-2de7.vercel.app",
+]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://fresh-mart-[a-z0-9-]+-siddhi-2de7\.vercel\.app$",
 ]
